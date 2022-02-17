@@ -309,8 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918b18b297c58604c8263988cc73c6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputModel: {fileID: 5022602860645237092, guid: 4ea0fc90e2eec9d45a5ad558c82cc91a,
-    type: 3}
+  inputModel: {fileID: 11400000, guid: df397ef503c8c3f45aa642fca61c57b3, type: 3}
   preprocessMaterial: {fileID: 2100000, guid: 58e00242fad4b57459ef0db414c69a27, type: 2}
   postprocessMaterial: {fileID: 2100000, guid: 60d072d8133ee7a4c89414da1d3b7a3c, type: 2}
   inputResolutionY: 256
