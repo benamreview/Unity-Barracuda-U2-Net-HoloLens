@@ -100,17 +100,26 @@ public class Inference : MonoBehaviour
         Graphics.Blit(m_WebcamTexture, targetRT, postprocessMaterial);
 
         Tensor input = new Tensor(targetRT, 3);
+        Debug.Log(input.shape);
 #else
         Tensor input = m_Input;
 #endif
         m_Worker.Execute(input);
-        Tensor result = m_Worker.PeekOutput("output");
+
+        // Tensor result = m_Worker.PeekOutput("output");
+        Tensor result = m_Worker.PeekOutput("conv2d_132");
+        Tensor new_result = result.Reshape(new TensorShape(1, 256, 256, 1));
+        Debug.Log(result.shape);
+        Debug.Log(new_result.shape);
+
 
         RenderTexture resultMask = new RenderTexture(inputResolutionX, inputResolutionY, 0);
         resultMask.enableRandomWrite = true;
         resultMask.Create();
 
-        result.ToRenderTexture(resultMask);
+        // result.ToRenderTexture(resultMask);
+        new_result.ToRenderTexture(resultMask);
+
 
         postprocessMaterial.mainTexture = resultMask;
 #if (WEBCAM)
