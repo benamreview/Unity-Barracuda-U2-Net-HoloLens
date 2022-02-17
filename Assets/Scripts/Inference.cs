@@ -37,11 +37,12 @@ public class Inference : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
-		
+
         m_RuntimeModel = ModelLoader.Load(inputModel, false);
         m_Worker = WorkerFactory.CreateWorker(WorkerFactory.Type.ComputePrecompiled, m_RuntimeModel, false);
 
 #if (WEBCAM)
+        Debug.Log("WEBCAM!");
 
 #if UNITY_WSA 
         Resolution cameraResolution = VideoCapture.SupportedResolutions.OrderByDescending((res) => res.width * res.height).First();
@@ -87,10 +88,10 @@ public class Inference : MonoBehaviour
 #endif
     }
 
-    private void OnStartedVideoCaptureMode(VideoCapture.VideoCaptureResult result)
-    {
-        throw new NotImplementedException();
-    }
+    // private void OnStartedVideoCaptureMode(VideoCapture.VideoCaptureResult result)
+    // {
+    //     throw new NotImplementedException();
+    // }
 
     void Update()
     {
@@ -104,11 +105,11 @@ public class Inference : MonoBehaviour
 #endif
         m_Worker.Execute(input);
         Tensor result = m_Worker.PeekOutput("output");
-        
+
         RenderTexture resultMask = new RenderTexture(inputResolutionX, inputResolutionY, 0);
         resultMask.enableRandomWrite = true;
         resultMask.Create();
-        
+
         result.ToRenderTexture(resultMask);
 
         postprocessMaterial.mainTexture = resultMask;

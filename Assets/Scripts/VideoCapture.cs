@@ -3,7 +3,7 @@
 // Licensed under the Apache 2.0 license. See LICENSE file in the project root for full license information.
 //
 
-#if UNITY_WSA 
+#if UNITY_WSA
 using System;
 using System.Collections.Generic;
 using System.Linq;
